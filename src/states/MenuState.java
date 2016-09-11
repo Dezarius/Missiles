@@ -34,10 +34,9 @@ public class MenuState extends BasicGameState {
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         g.drawImage(Resources.getImage("background"), 0, 0);
-        g.drawString(String.valueOf(game.getCurrentStateID()), 0, 0);
         //g.drawString("MENU!", Config.windowWidth/2-22, Config.windowHeight/2 -50);
         EntityManager.draw();
-        g.drawString(String.valueOf(EntityManager.cloads.size()), 0, 0);
+        //g.drawString(String.valueOf(EntityManager.cloads.size()), 0, 0);
         g.drawImage(Resources.getImage("title"), 0, 0);
     }
 

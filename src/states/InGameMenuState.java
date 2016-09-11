@@ -40,9 +40,6 @@ public class InGameMenuState extends BasicGameState {
         g.drawImage(Resources.getImage("mapOverlay"), 0, 0);
         g.drawString(String.valueOf(EntityManager.cloads.size()), 0, 0);
         
-        g.drawString(String.valueOf(EntityManager.missile1.angle), 10, 30);
-        g.drawString(String.valueOf(EntityManager.missile1.wantedangle), 10, 40);
-        
     }
 
     @Override

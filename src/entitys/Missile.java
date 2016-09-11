@@ -14,14 +14,14 @@ import org.newdawn.slick.Image;
  */
 public class Missile {
     public float x,y,speed, angle, wantedangle;
-    long time;
+    long desttime;
     Image img;
     
     Missile(float x1, float y1, long time1, float speed1, float angle1) {
         this.x = x1;
         this.y = y1;
-        this.speed = speed1;
-        this.time = time1;
+        this.speed = speed1 * 0.31f;
+        this.desttime = System.currentTimeMillis() + time1;
         this.angle = angle1;
         img = Resources.getImage("missile");
         img.setCenterOfRotation(16, 16);
@@ -43,19 +43,21 @@ public class Missile {
         }
         if(wantedangle >= angle) {
             if(wantedangle >= angle + 180 ) {
-                angle -= 3.1f;
+                angle -= 0.2f * delta;
             } else {
-                angle += 3.1f;
+                angle += 0.2f * delta;
             }
         } else {
            if(angle > wantedangle + 180) {
-               angle += 3.1f; 
+               angle += 0.2f * delta; 
            } else {
-               angle -= 3.1f;
+               angle -= 0.2f * delta;
            }
            
         }
     }
+    
+    
     
     
     public void move(int delta) {
@@ -68,9 +70,19 @@ public class Missile {
         
         
         
-        x += delta * 0.3f * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * 0.36f * Math.cos((90 + angle) * Math.PI / 180);
-        y += delta * 0.3f * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * 0.36f * Math.sin((90 + angle) * Math.PI / 180);
+        x += delta * 0.3f * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.cos((90 + angle) * Math.PI / 180);
+        y += delta * 0.3f * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.sin((90 + angle) * Math.PI / 180);
     }
     
+    public long getDestTime() {
+        return this.desttime;
+    }
+    
+    public float getX() {
+        return this.x;
+    }
+    public float getY() {
+        return this.y;
+    }
     
 }

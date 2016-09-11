@@ -7,6 +7,7 @@ package entitys;
 
 import java.util.ArrayList;
 import java.util.List;
+import main.Config;
 
 /**
  *
@@ -19,7 +20,6 @@ public class EntityManager {
     public static List cloads = new ArrayList();
     
     public static List missiles = new ArrayList();
-    public static Missile missile1 = new Missile(500,500,10000,0.4f, player.getAngle());
     
     
     public static void draw() {
@@ -28,11 +28,34 @@ public class EntityManager {
             c.draw();
         }
         player.draw();
-        missile1.draw();
+        for(Object o : missiles) {
+            Missile m = (Missile) o;
+            m.draw();
+        }
     }
     
     public static void missiles(int delta) {
-        missile1.move(delta);
+        List removeList = new ArrayList();
+        for(Object o : missiles) {
+            Missile m = (Missile) o;
+            if(m.getX() > Config.windowWidth/2 - 15 && m.getX() < Config.windowWidth/2 + 15 && m.getY() > Config.windowHeight/2 - 15 && m.getY() < Config.windowHeight/2 + 15) {
+                System.out.println("Getroffen!");
+                removeList.add(o);
+            }    
+            else if(System.currentTimeMillis() < m.getDestTime()) {
+                m.move(delta);
+            }
+            else {
+                removeList.add(o);
+            }
+        }
+        for(Object o : removeList) {
+            missiles.remove(o);
+        }
+        
+        if(missiles.size() == 0) {
+            missiles.add(new Missile(300,-300,10000,1.3f,180));
+        }
     }
     
     public static void cloads(int delta) {

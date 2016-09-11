@@ -32,7 +32,7 @@ public class Resources {
     
     
    try {
-        sounds.put("music",loadSound("music.ogg"));
+        //sounds.put("music",loadSound("music.ogg"));
         images.put("background", loadImage("background.jpg"));
         images.put("mapOverlay", loadImage("mapOverlay.png"));
         images.put("airplane", loadImage("airplane2.png"));
