@@ -5,6 +5,7 @@
  */
 package entitys;
 
+import static entitys.EntityManager.missiles;
 import gui.Resources;
 import main.Config;
 
@@ -15,6 +16,7 @@ import main.Config;
 public class Player {
     float x,y;
     float angle;
+    int direction;
     
     
     Player() {
@@ -51,6 +53,22 @@ public class Player {
     
     public float getY() {
         return y;
+    }
+    
+    public void update() {
+            if(angle < 45f || angle > 315) {
+                direction = 0; 
+            } else if(angle > 45f && angle < 135) {
+                direction = 1;             
+            } else if(angle > 135 && angle < 225) {
+                direction = 2;             
+            } else if(angle > 225 && angle < 315) {
+                direction = 3;              
+            }
+    }
+    
+    public int getDirection() {
+        return direction;
     }
     
 }

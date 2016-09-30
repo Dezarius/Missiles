@@ -42,19 +42,29 @@ public class GameState extends BasicGameState {
         //g.drawString(String.valueOf(EntityManager.missile1.angle), 10, 30);
         //g.drawString(String.valueOf(EntityManager.missile1.wantedangle), 10, 40);
         
+        /*
+        g.drawLine(Config.windowWidth / 2-12, Config.windowHeight /2 -12, Config.windowWidth / 2+12, Config.windowHeight /2-12);
+        g.drawLine(Config.windowWidth / 2 -12, Config.windowHeight /2 -12, Config.windowWidth / 2-12, Config.windowHeight /2+12);
+        g.drawLine(Config.windowWidth / 2 +12, Config.windowHeight /2 +12, Config.windowWidth / 2+12, Config.windowHeight /2-12);
+        g.drawLine(Config.windowWidth / 2 +12, Config.windowHeight /2 +12, Config.windowWidth / 2-12, Config.windowHeight /2+12);
+        */
     }
 
-    public static boolean start = true;
+    public static boolean init = true;
+    
+    public static long startTime = 0;
     
     @Override
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         EntityManager.cloads(delta);
         EntityManager.missiles(delta);
+        EntityManager.player.update();
         
-        if(start) {
+        if(init) {
             if(EntityManager.player.getAngle() < 182 && EntityManager.player.getAngle() > 178) {
                 EntityManager.player.setAngle(180);
-                start = false;
+                init = false;
+                startTime = System.currentTimeMillis();
             }
             else if( EntityManager.player.getAngle() > 181) {
                 EntityManager.player.addAngle(-0.28f * delta);
@@ -62,6 +72,7 @@ public class GameState extends BasicGameState {
             else if(EntityManager.player.getAngle() < 179) {
                 EntityManager.player.addAngle(0.28f * delta);
             }
+
         }
         else {
             Keyboard.keyInput(container, game, delta);

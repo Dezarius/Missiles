@@ -38,7 +38,7 @@ public class InGameMenuState extends BasicGameState {
         
         EntityManager.draw();
         g.drawImage(Resources.getImage("mapOverlay"), 0, 0);
-        g.drawString(String.valueOf(EntityManager.cloads.size()), 0, 0);
+        g.drawString(String.valueOf(EntityManager.clouds.size()), 0, 0);
         
     }
 

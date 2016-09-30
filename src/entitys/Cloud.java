@@ -11,10 +11,10 @@ import gui.Resources;
  *
  * @author janabelmann
  */
-public class Cload {
+public class Cloud {
     float x,y;
     
-    Cload(float x1, float y1) {
+    Cloud(float x1, float y1) {
         this.x = x1;
         this.y = y1;
     }

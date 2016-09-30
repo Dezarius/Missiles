@@ -14,6 +14,10 @@ public class Config {
     public static int windowWidth = 700;
     public static int windowHeight = 700;
     
+    public static int missileSize = 32;
+    
     public static int playersize = 16;
+    
+    public static float normalMissileSpeed = 1.3f;
     
 }

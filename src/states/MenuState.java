@@ -46,7 +46,12 @@ public class MenuState extends BasicGameState {
     public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
         Keyboard.keyInput(container, game, delta);
         EntityManager.cloads(delta);
-        GameState.start = true;
+        if(GameState.init == false) {
+            GameState.init = true;
+            GameState.startTime = 0;
+            EntityManager.clear();
+        }
+        
     }
     
 }

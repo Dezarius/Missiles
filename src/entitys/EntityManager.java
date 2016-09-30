@@ -8,6 +8,7 @@ package entitys;
 import java.util.ArrayList;
 import java.util.List;
 import main.Config;
+import states.GameState;
 
 /**
  *
@@ -17,14 +18,14 @@ public class EntityManager {
     
     public static Player player = new Player();
     
-    public static List cloads = new ArrayList();
+    public static List clouds = new ArrayList();
     
     public static List missiles = new ArrayList();
     
     
     public static void draw() {
-        for(Object o : cloads) {
-            Cload c = (Cload) o;
+        for(Object o : clouds) {
+            Cloud c = (Cloud) o;
             c.draw();
         }
         player.draw();
@@ -34,15 +35,19 @@ public class EntityManager {
         }
     }
     
+    public static void clear() {
+        missiles = new ArrayList();
+    }
+    
     public static void missiles(int delta) {
         List removeList = new ArrayList();
         for(Object o : missiles) {
             Missile m = (Missile) o;
-            if(m.getX() > Config.windowWidth/2 - 15 && m.getX() < Config.windowWidth/2 + 15 && m.getY() > Config.windowHeight/2 - 15 && m.getY() < Config.windowHeight/2 + 15) {
-                System.out.println("Getroffen!");
+            if(m.getX()> Config.windowWidth/2 - 12 && m.getX()< Config.windowWidth/2  + 12&& m.getY() > Config.windowHeight/2 - 12&& m.getY() < Config.windowHeight/2 + 12 ) {
+                //System.out.println("Getroffen!");
                 removeList.add(o);
             }    
-            else if(System.currentTimeMillis() < m.getDestTime()) {
+            if(System.currentTimeMillis() < m.getDestTime()) {
                 m.move(delta);
             }
             else {
@@ -53,15 +58,14 @@ public class EntityManager {
             missiles.remove(o);
         }
         
-        if(missiles.size() == 0) {
-            missiles.add(new Missile(300,-300,10000,1.3f,180));
-        }
+        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10000 && GameState.startTime != 0)
+            spawnMissile("normal");
     }
     
     public static void cloads(int delta) {
         List removeList = new ArrayList();
-        for(Object o : cloads) {
-            Cload c = (Cload) o;
+        for(Object o : clouds) {
+            Cloud c = (Cloud) o;
             if(c.getX() < - 3000 || c.getX() > 5000 || c.getY() < -3000 || c.getY() > 5000) {
                 removeList.add(c);
             }
@@ -70,7 +74,7 @@ public class EntityManager {
             }
         }
         for(Object o : removeList) {
-            cloads.remove(o);
+            clouds.remove(o);
         }
         
         float xp = (float) Math.random() * 1000;
@@ -81,9 +85,9 @@ public class EntityManager {
         boolean c2 = true;
         boolean c3 = true;
         boolean c4 = true;
-        for(Object o : cloads) {
-            Cload c = (Cload) o;
-            if(((xp > 0 && xp < 720) && (yp > 0 && yp < 720)) || c.getX() - xp < 300 && c.getX() - xp > -300 && c.getY() - yp < 300 && c.getY() -yp > -300)
+        for(Object o : clouds) {
+            Cloud c = (Cloud) o;
+            if(((xp > -100 && xp < 720) && (yp > -100 && yp < 720)) || c.getX() - xp < 300 && c.getX() - xp > -300 && c.getY() - yp < 300 && c.getY() -yp > -300)
                 c1 = false;
             if(c.getX() - xp < 300 && c.getX() - xp > -300 && c.getY() - ym < 300 && c.getY() -ym > -300)
                 c2 = false;
@@ -93,17 +97,49 @@ public class EntityManager {
                 c4 = false;
         }  
         if(c1) {
-            cloads.add(new Cload(xp,yp));
+            clouds.add(new Cloud(xp,yp));
         }
         if(c2) {
-            cloads.add(new Cload(xp,ym));
+            clouds.add(new Cloud(xp,ym));
         }
         if(c3) {
-            cloads.add(new Cload(xm,yp));
+            clouds.add(new Cloud(xm,yp));
         }
         if(c4) {
-            cloads.add(new Cload(xm,ym));
+            clouds.add(new Cloud(xm,ym));
         }
     }
     
+    
+    static boolean test = true;
+    public static void spawnMissile(String type) {
+        float speed = 0;
+        if(type.equals("normal")) {
+            speed = Config.normalMissileSpeed;
+        }
+        int random = (int) (Math.random() * 4);
+        while(random == player.getDirection()) {
+            random = (int) (Math.random() * 4);
+        }
+        switch (random) {
+            case 0:
+                missiles.add(new Missile((float) Math.random() * 700, -300,10000,speed,player.getAngle(),type));
+                break;
+            case 1:
+                missiles.add(new Missile(900,(float) Math.random() * 700,10000,speed,player.getAngle(),type));
+                break;
+            case 2:
+                missiles.add(new Missile((float) Math.random() * 700, 900,10000,speed,player.getAngle(),type));
+                break;
+            case 3:
+                missiles.add(new Missile(-300,(float) Math.random() * 700,10000,speed,player.getAngle(),type));
+                break;
+            default:
+                break;
+        }
+           
+        
+    }
 }
+
+ 
