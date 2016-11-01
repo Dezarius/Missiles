@@ -58,7 +58,7 @@ public class EntityManager {
             missiles.remove(o);
         }
         
-        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10000 && GameState.startTime != 0)
+        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 1 && GameState.startTime != 0)
             spawnMissile("normal");
     }
     

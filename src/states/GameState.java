@@ -9,6 +9,7 @@ import entitys.EntityManager;
 import gui.Resources;
 import input.Keyboard;
 import main.Config;
+import main.Utilities;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -48,6 +49,8 @@ public class GameState extends BasicGameState {
         g.drawLine(Config.windowWidth / 2 +12, Config.windowHeight /2 +12, Config.windowWidth / 2+12, Config.windowHeight /2-12);
         g.drawLine(Config.windowWidth / 2 +12, Config.windowHeight /2 +12, Config.windowWidth / 2-12, Config.windowHeight /2+12);
         */
+        
+        Resources.timeFont().drawString(0, 0, Utilities.getTimer());
     }
 
     public static boolean init = true;
@@ -59,8 +62,10 @@ public class GameState extends BasicGameState {
         EntityManager.cloads(delta);
         EntityManager.missiles(delta);
         EntityManager.player.update();
+        Utilities.addTime(delta);
         
         if(init) {
+            Utilities.resetTimer();
             if(EntityManager.player.getAngle() < 182 && EntityManager.player.getAngle() > 178) {
                 EntityManager.player.setAngle(180);
                 init = false;

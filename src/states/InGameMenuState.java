@@ -9,6 +9,7 @@ import entitys.EntityManager;
 import gui.Resources;
 import input.Keyboard;
 import main.Config;
+import main.Utilities;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
@@ -38,7 +39,8 @@ public class InGameMenuState extends BasicGameState {
         
         EntityManager.draw();
         g.drawImage(Resources.getImage("mapOverlay"), 0, 0);
-        g.drawString(String.valueOf(EntityManager.clouds.size()), 0, 0);
+        if(Utilities.getTime() > 0) 
+            Resources.timeFont().drawString(0, 0, Utilities.getTimer());
         
     }
 

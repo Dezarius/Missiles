@@ -4,6 +4,7 @@
 
 package gui;
 
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -12,6 +13,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.SpriteSheet;
+import org.newdawn.slick.TrueTypeFont;
 
 /**
  * Holds Maps of all images,sprites and sounds.
@@ -21,6 +23,9 @@ public class Resources {
   private static Map<String, Image> images; 
   private static Map<String, SpriteSheet> sprites;
   private static Map<String, Sound> sounds;
+  
+  private static Font font = new Font("Futura",Font.BOLD, 20);
+  private static TrueTypeFont trueTypeFont= new TrueTypeFont(font, true);
   
   /**
    * Init all Maps and loads all images,sounds,sprites.
@@ -99,5 +104,9 @@ public class Resources {
    */
   public static Sound getSound(String getter) {
     return sounds.get(getter);
+  }
+  
+  public static TrueTypeFont timeFont() {
+      return trueTypeFont;
   }
 } 

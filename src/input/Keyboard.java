@@ -6,6 +6,7 @@
 package input;
 
 import entitys.EntityManager;
+import main.Utilities;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.Input;
@@ -32,6 +33,7 @@ public class Keyboard {
             s.enterState(1);
         } else if (gc.getInput().isKeyPressed(Input.KEY_M) && s.getCurrentStateID() == 2) {
             gc.getInput().clearKeyPressedRecord();
+            Utilities.resetTimer();
             s.enterState(0);
         } else if (gc.getInput().isKeyPressed(Input.KEY_ESCAPE)) {
             if (s.getCurrentStateID() == 1) {
