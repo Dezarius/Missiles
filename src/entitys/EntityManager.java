@@ -42,16 +42,32 @@ public class EntityManager {
     public static void missiles(int delta) {
         List removeList = new ArrayList();
         for(Object o : missiles) {
+            boolean isAdded = false;
             Missile m = (Missile) o;
             if(m.getX()> Config.windowWidth/2 - 12 && m.getX()< Config.windowWidth/2  + 12&& m.getY() > Config.windowHeight/2 - 12&& m.getY() < Config.windowHeight/2 + 12 ) {
                 //System.out.println("Getroffen!");
                 removeList.add(o);
-            }    
+                isAdded = true;
+            }
+            
+            for(Object obj : missiles) {
+                Missile mis = (Missile) obj;
+                if(mis != m) {
+                    if(mis.getX()+16 > m.getX()+9 && mis.getX()+16 < m.getX() + 23 && mis.getY()+16 > m.getY()+9 && mis.getY()+16 < m.getY() +23) {
+                        removeList.add(obj);
+                        if(!isAdded) {
+                            removeList.add(o);
+                            isAdded = true;
+                        }
+                    }
+                }
+            }
             if(System.currentTimeMillis() < m.getDestTime()) {
                 m.move(delta);
             }
             else {
-                removeList.add(o);
+                if(!isAdded)
+                    removeList.add(o);
             }
         }
         for(Object o : removeList) {
@@ -61,6 +77,7 @@ public class EntityManager {
         if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 1 && GameState.startTime != 0)
             spawnMissile("normal");
     }
+    
     
     public static void cloads(int delta) {
         List removeList = new ArrayList();
