@@ -35,7 +35,7 @@ public class Engine extends StateBasedGame{
     gc.setTargetFrameRate(60);
     gc.setAlwaysRender(true);
     gc.setVSync(true);
-    gc.setShowFPS(false);
+    gc.setShowFPS(true);
     
     //loads all Recourses
     new Resources();

@@ -17,6 +17,8 @@ public class Missile {
     public float x,y,speed, angle, wantedangle;
     long desttime;
     Image img;
+    private float scale;
+    private boolean despawning;
     
     Missile(float x, float y, long time1, float angle1, String type) {
         this.x = x;
@@ -32,15 +34,19 @@ public class Missile {
         img = Resources.getImage(type);
         img.setCenterOfRotation(16, 16);
         img.setRotation(angle);
+        scale = 1;
     }
     
     
     public void draw() {
         img.setRotation(angle);
-        img.draw(x -16,y-16);
+        img.draw(x -16,y-16,scale);
+        if(despawning) {
+            scale /= 1.008f;
+        }
     }
     
-    public void angle(int delta) {
+    public void changeAngle(int delta) {
         float xp = EntityManager.player.getX() + 16 - (x + 16);
         float yp = EntityManager.player.getY() + 16 - (y +16);
         wantedangle = (float) ((float) (180/Math.PI) * Math.acos( (xp*0+yp*(-1))/(Math.sqrt(xp*xp+yp*yp) * Math.sqrt(1))));
@@ -64,22 +70,28 @@ public class Missile {
         }
                
     }
-    
-    
+
+    public void despawn() {
+        despawning = true;
+    }
     
     
     public void move(int delta) {
-        angle(delta);
-        if(angle < 0) {
-            angle = 360 + angle;
+        if(despawning) {
+            x += delta * 0.3f * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.cos((90 + angle) * Math.PI / 180);
+            y += delta * 0.3f * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.sin((90 + angle) * Math.PI / 180);
+
+            this.speed /= 1.018f;
+        } else {
+            changeAngle(delta);
+            if (angle < 0) {
+                angle = 360 + angle;
+            }
+            angle = angle % 360;
+
+            x += delta * 0.3f * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.cos((90 + angle) * Math.PI / 180);
+            y += delta * 0.3f * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.sin((90 + angle) * Math.PI / 180);
         }
-        angle = angle % 360;
-        
-        
-        
-        
-        x += delta * 0.3f * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.cos((90 + angle) * Math.PI / 180);
-        y += delta * 0.3f * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.sin((90 + angle) * Math.PI / 180);
     }
     
     public long getDestTime() {
@@ -92,5 +104,5 @@ public class Missile {
     public float getY() {
         return this.y;
     }
-    
+    public float getSpeed() { return this.speed;}
 }

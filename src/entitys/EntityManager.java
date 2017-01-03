@@ -21,6 +21,8 @@ public class EntityManager {
     public static List clouds = new ArrayList();
     
     public static List missiles = new ArrayList();
+
+    public static List despawnList = new ArrayList();
     
     
     public static void draw() {
@@ -33,12 +35,16 @@ public class EntityManager {
             Missile m = (Missile) o;
             m.draw();
         }
+        for(Object o : despawnList) {
+            Missile m = (Missile) o;
+            m.draw();
+        }
     }
     
     public static void clear() {
         missiles = new ArrayList();
     }
-    
+
     public static void missiles(int delta) {
         List removeList = new ArrayList();
         for(Object o : missiles) {
@@ -70,11 +76,29 @@ public class EntityManager {
                     removeList.add(o);
             }
         }
+        for(Object o : despawnList) {
+            Missile m = (Missile) o;
+            m.move(delta);
+            if(m.getSpeed() <= 0.06f) {
+                removeList.add(m);
+            }
+        }
+
         for(Object o : removeList) {
+            Missile m = (Missile) o;
+            if(missiles.contains(m)) {
+                despawnList.add(o);
+                m.despawn();
+            }
+            else {
+                despawnList.remove(m);
+            }
             missiles.remove(o);
         }
+
+
         
-        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10000 && GameState.startTime != 0)
+        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 1 && GameState.startTime != 0)
             spawnMissile("normal");
     }
     
