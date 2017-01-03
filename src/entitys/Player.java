@@ -14,8 +14,8 @@ import main.Config;
  * @author janabelmann
  */
 public class Player {
-    float x,y;
-    float angle;
+    float x,y; //coordinates
+    float angle; //angle in grad
     int direction;
     
     

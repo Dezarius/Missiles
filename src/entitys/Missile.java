@@ -6,6 +6,7 @@
 package entitys;
 
 import gui.Resources;
+import main.Config;
 import org.newdawn.slick.Image;
 
 /**
@@ -17,10 +18,15 @@ public class Missile {
     long desttime;
     Image img;
     
-    Missile(float x1, float y1, long time1, float speed1, float angle1, String type) {
-        this.x = x1;
-        this.y = y1;
-        this.speed = speed1 * 0.31f;
+    Missile(float x, float y, long time1, float angle1, String type) {
+        this.x = x;
+        this.y = y;
+        if(type.equals("normal")) {
+            this.speed = Config.normalMissileSpeed * 0.31f;
+        }
+        else {
+            this.speed = 0;
+        }
         this.desttime = System.currentTimeMillis() + time1;
         this.angle = angle1;
         img = Resources.getImage(type);

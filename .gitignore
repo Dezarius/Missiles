@@ -1,0 +1,7 @@
+.idea/libraries/slick.xml
+*.class
+.idea/modules.xml
+.idea/misc.xml
+.idea/workspace.xml
+*.xml
+*.iml

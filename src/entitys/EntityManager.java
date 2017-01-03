@@ -74,7 +74,7 @@ public class EntityManager {
             missiles.remove(o);
         }
         
-        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 1 && GameState.startTime != 0)
+        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10000 && GameState.startTime != 0)
             spawnMissile("normal");
     }
     
@@ -126,36 +126,16 @@ public class EntityManager {
             clouds.add(new Cloud(xm,ym));
         }
     }
-    
-    
-    static boolean test = true;
+
     public static void spawnMissile(String type) {
-        float speed = 0;
-        if(type.equals("normal")) {
-            speed = Config.normalMissileSpeed;
-        }
-        int random = (int) (Math.random() * 4);
-        while(random == player.getDirection()) {
-            random = (int) (Math.random() * 4);
-        }
-        switch (random) {
-            case 0:
-                missiles.add(new Missile((float) Math.random() * 700, -300,10000,speed,player.getAngle(),type));
-                break;
-            case 1:
-                missiles.add(new Missile(900,(float) Math.random() * 700,10000,speed,player.getAngle(),type));
-                break;
-            case 2:
-                missiles.add(new Missile((float) Math.random() * 700, 900,10000,speed,player.getAngle(),type));
-                break;
-            case 3:
-                missiles.add(new Missile(-300,(float) Math.random() * 700,10000,speed,player.getAngle(),type));
-                break;
-            default:
-                break;
-        }
-           
-        
+        double angleForCalculation = player.getAngle() + 180;
+        angleForCalculation %= 360;
+        angleForCalculation = angleForCalculation + (Math.random() * 2 - 1) * 70;
+
+        double sinus = Math.sin(angleForCalculation/180 * Math.PI);
+        double cosinus = Math.cos(angleForCalculation/180 * Math.PI);
+
+        missiles.add(new Missile((int) (500 * sinus + 350),(int) (-500 * cosinus + 350),10000,player.getAngle(),type));
     }
 }
 
