@@ -98,7 +98,7 @@ public class EntityManager {
 
 
         
-        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10000 && GameState.startTime != 0)
+        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10 && GameState.startTime != 0)
             spawnMissile(MissileEnum.speedy);
     }
     
@@ -159,7 +159,7 @@ public class EntityManager {
         double sinus = Math.sin(angleForCalculation/180 * Math.PI);
         double cosinus = Math.cos(angleForCalculation/180 * Math.PI);
 
-        missiles.add(new Missile((int) (500 * sinus + 350),(int) (-500 * cosinus + 350),10000,player.getAngle(),type));
+        missiles.add(new Missile((int) (65 * Config.windowWidth / 100 * sinus + Config.windowWidth /2),(int) (-65 * Config.windowHeight / 100 * cosinus + Config.windowHeight / 2),10000,player.getAngle(),type));
     }
 }
 

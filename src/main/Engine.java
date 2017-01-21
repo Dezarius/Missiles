@@ -38,7 +38,7 @@ public class Engine extends StateBasedGame{
     gc.setShowFPS(true);
     gc.getGraphics().setAntiAlias(false);
 
-    gc.setFullscreen(true);
+    gc.setFullscreen(false);
 
     if(Config.windowHeight >= Config.windowWidth) {
       Config.windowScale = Config.windowHeight / 100.0f;

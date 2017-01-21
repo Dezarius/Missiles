@@ -7,6 +7,7 @@ package entitys;
 
 import gui.Resources;
 import main.Config;
+import org.newdawn.slick.Image;
 
 /**
  *
@@ -14,14 +15,18 @@ import main.Config;
  */
 public class Cloud {
     float x,y;
-    
+    Image img;
+
+
     Cloud(float x1, float y1) {
         this.x = x1;
         this.y = y1;
+        img = Resources.getImage("wolke");
     }
     
     public void draw() {
-        Resources.getImage("wolke").draw(x, y, Config.scale);
+        img.draw(x, y, Config.scale);
+
     }
     
     public void move(int delta) {
