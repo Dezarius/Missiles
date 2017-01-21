@@ -15,7 +15,7 @@ public class Config {
     public static int windowHeight = 1440;
 
     public static float windowScale = 0;
-    public static float scale = 1.3f;
+    public static float scale = 2.f;
     
     public static int missileSize = 32;
     

@@ -25,8 +25,8 @@ public class Cloud {
     }
     
     public void move(int delta) {
-        x += delta * 0.3f * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180);
-        y += delta * 0.3f * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180);
+        x += delta * 0.3f * Config.scale * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180);
+        y += delta * 0.3f * Config.scale * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180);
     }
     
     public float getX() {

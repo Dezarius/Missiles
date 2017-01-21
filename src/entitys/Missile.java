@@ -24,10 +24,10 @@ public class Missile {
         this.x = x;
         this.y = y;
         if(type == MissileEnum.normal) {
-            this.speed = Config.normalMissileSpeed * 0.31f;
+            this.speed = Config.normalMissileSpeed * 0.31f * Config.scale;
         }
         else if(type == MissileEnum.speedy) {
-            this.speed = Config.normalMissileSpeed * 0.38f;
+            this.speed = Config.normalMissileSpeed * 0.38f * Config.scale;
         }
         else {
             this.speed = 0;
@@ -82,8 +82,8 @@ public class Missile {
     
     public void move(int delta) {
         if(despawning) {
-            x += delta * 0.3f * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.cos((90 + angle) * Math.PI / 180);
-            y += delta * 0.3f * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.sin((90 + angle) * Math.PI / 180);
+            x += delta * 0.3f * Config.scale * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.cos((90 + angle) * Math.PI / 180);
+            y += delta * 0.3f * Config.scale * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.sin((90 + angle) * Math.PI / 180);
 
             this.speed /= 1.018f;
         } else {
@@ -93,8 +93,8 @@ public class Missile {
             }
             angle = angle % 360;
 
-            x += delta * 0.3f * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.cos((90 + angle) * Math.PI / 180);
-            y += delta * 0.3f * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.sin((90 + angle) * Math.PI / 180);
+            x += delta * 0.3f * Config.scale * Math.cos((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.cos((90 + angle) * Math.PI / 180);
+            y += delta * 0.3f * Config.scale * Math.sin((90 + EntityManager.player.getAngle()) * Math.PI / 180) - delta * this.speed * Math.sin((90 + angle) * Math.PI / 180);
         }
     }
     
