@@ -6,6 +6,7 @@
 package entitys;
 
 import gui.Resources;
+import main.Config;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Cloud {
     }
     
     public void draw() {
-        Resources.getImage("wolke").draw(x, y);
+        Resources.getImage("wolke").draw(x, y, Config.scale);
     }
     
     public void move(int delta) {

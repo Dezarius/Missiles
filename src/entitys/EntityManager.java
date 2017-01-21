@@ -50,7 +50,7 @@ public class EntityManager {
         for(Object o : missiles) {
             boolean isAdded = false;
             Missile m = (Missile) o;
-            if(m.getX()> Config.windowWidth/2 - 12 && m.getX()< Config.windowWidth/2  + 12&& m.getY() > Config.windowHeight/2 - 12&& m.getY() < Config.windowHeight/2 + 12 ) {
+            if(m.getX()> Config.windowWidth/2 - 12 * Config.scale && m.getX()< Config.windowWidth/2  + 12 * Config.scale && m.getY() > Config.windowHeight/2 - 12 * Config.scale && m.getY() < Config.windowHeight/2 + 12 * Config.scale ) {
                 //System.out.println("Getroffen!");
                 removeList.add(o);
                 isAdded = true;
@@ -98,8 +98,8 @@ public class EntityManager {
 
 
         
-        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 1 && GameState.startTime != 0)
-            spawnMissile("normal");
+        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10000 && GameState.startTime != 0)
+            spawnMissile(MissileEnum.speedy);
     }
     
     
@@ -107,7 +107,7 @@ public class EntityManager {
         List removeList = new ArrayList();
         for(Object o : clouds) {
             Cloud c = (Cloud) o;
-            if(c.getX() < - 3000 || c.getX() > 5000 || c.getY() < -3000 || c.getY() > 5000) {
+            if(c.getX() < - 3000 || c.getX() > Config.windowWidth + 2000 || c.getY() < -3000 || c.getY() > Config.windowHeight + 1500) {
                 removeList.add(c);
             }
             else {
@@ -151,7 +151,7 @@ public class EntityManager {
         }
     }
 
-    public static void spawnMissile(String type) {
+    public static void spawnMissile(MissileEnum type) {
         double angleForCalculation = player.getAngle() + 180;
         angleForCalculation %= 360;
         angleForCalculation = angleForCalculation + (Math.random() * 2 - 1) * 70;

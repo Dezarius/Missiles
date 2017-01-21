@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import main.Config;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -38,12 +40,13 @@ public class Resources {
     
    try {
         //sounds.put("music",loadSound("music.ogg"));
-        images.put("background", loadImage("background.jpg"));
-        images.put("mapOverlay", loadImage("mapOverlay.png"));
+        images.put("sky", loadImage("sky.png"));
+        images.put("menuOverlay", loadImage("menuOverlay.png"));
         images.put("airplane", loadImage("airplane2.png"));
         images.put("wolke", loadImage("wolke.png"));
         images.put("title", loadImage("title.png"));
         images.put("normal", loadImage("missile.png"));
+        images.put("speedy", loadImage("speedy.png"));
     } catch (SlickException ex) {
       System.out.println("FEHLER beim Laden der Resources. Eine gelöscht?!?");
       Logger.getLogger(Resources.class.getName()).log(Level.SEVERE, null, ex);

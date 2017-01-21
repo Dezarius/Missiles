@@ -17,38 +17,42 @@ public class Missile {
     public float x,y,speed, angle, wantedangle;
     long desttime;
     Image img;
-    private float scale;
+    private float MScale;
     private boolean despawning;
     
-    Missile(float x, float y, long time1, float angle1, String type) {
+    Missile(float x, float y, long time1, float angle1, MissileEnum type) {
         this.x = x;
         this.y = y;
-        if(type.equals("normal")) {
+        if(type == MissileEnum.normal) {
             this.speed = Config.normalMissileSpeed * 0.31f;
+        }
+        else if(type == MissileEnum.speedy) {
+            this.speed = Config.normalMissileSpeed * 0.38f;
         }
         else {
             this.speed = 0;
         }
         this.desttime = System.currentTimeMillis() + time1;
         this.angle = angle1;
-        img = Resources.getImage(type);
+        img = Resources.getImage(type.toString());
         img.setCenterOfRotation(16, 16);
         img.setRotation(angle);
-        scale = 1;
+        MScale = 1;
     }
     
     
     public void draw() {
+        img.setCenterOfRotation(16 * Config.scale,16 * Config.scale);
         img.setRotation(angle);
-        img.draw(x -16,y-16,scale);
+        img.draw(x - Config.missileSize * Config.scale / 2,y-Config.missileSize * Config.scale / 2, Config.scale * MScale);
         if(despawning) {
-            scale /= 1.008f;
+            MScale /= 1.008f;
         }
     }
     
     public void changeAngle(int delta) {
-        float xp = EntityManager.player.getX() + 16 - (x + 16);
-        float yp = EntityManager.player.getY() + 16 - (y +16);
+        float xp = Config.windowWidth /2 -x;//EntityManager.player.getX() + 16 - (x - 16);
+        float yp = Config.windowHeight /2 - y;//EntityManager.player.getY() + 16 - (y - 16);
         wantedangle = (float) ((float) (180/Math.PI) * Math.acos( (xp*0+yp*(-1))/(Math.sqrt(xp*xp+yp*yp) * Math.sqrt(1))));
         if(EntityManager.player.getX() < x) {
             wantedangle = 360 - wantedangle;

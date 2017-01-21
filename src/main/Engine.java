@@ -34,9 +34,20 @@ public class Engine extends StateBasedGame{
     //Some Framerate and logic stuff
     gc.setTargetFrameRate(60);
     gc.setAlwaysRender(true);
-    gc.setVSync(true);
+    gc.setVSync(false);
     gc.setShowFPS(true);
-    
+    gc.getGraphics().setAntiAlias(false);
+
+    gc.setFullscreen(true);
+
+    if(Config.windowHeight >= Config.windowWidth) {
+      Config.windowScale = Config.windowHeight / 100.0f;
+    }
+    else {
+      Config.windowScale = Config.windowWidth / 100.0f;
+    }
+
+
     //loads all Recourses
     new Resources();
     

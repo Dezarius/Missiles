@@ -35,7 +35,7 @@ public class GameState extends BasicGameState {
 
     @Override
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-        g.drawImage(Resources.getImage("background"), 0, 0);
+        Resources.getImage("sky").draw(0,0,Config.windowScale);
         //g.drawString("GAME!", Config.windowWidth/2-22, Config.windowHeight/2 -50);
         //g.drawString(String.valueOf(EntityManager.cloads.size()), 0, 0);
         
@@ -43,12 +43,12 @@ public class GameState extends BasicGameState {
         //g.drawString(String.valueOf(EntityManager.missile1.angle), 10, 30);
         //g.drawString(String.valueOf(EntityManager.missile1.wantedangle), 10, 40);
         
-        /*
+
         g.drawLine(Config.windowWidth / 2-12, Config.windowHeight /2 -12, Config.windowWidth / 2+12, Config.windowHeight /2-12);
         g.drawLine(Config.windowWidth / 2 -12, Config.windowHeight /2 -12, Config.windowWidth / 2-12, Config.windowHeight /2+12);
         g.drawLine(Config.windowWidth / 2 +12, Config.windowHeight /2 +12, Config.windowWidth / 2+12, Config.windowHeight /2-12);
         g.drawLine(Config.windowWidth / 2 +12, Config.windowHeight /2 +12, Config.windowWidth / 2-12, Config.windowHeight /2+12);
-        */
+
         
         Resources.timeFont().drawString(0, 0, Utilities.getTimer());
     }

@@ -11,8 +11,11 @@ package main;
  */
 public class Config {
     
-    public static int windowWidth = 700;
-    public static int windowHeight = 700;
+    public static int windowWidth = 3440;
+    public static int windowHeight = 1440;
+
+    public static float windowScale = 0;
+    public static float scale = 1.3f;
     
     public static int missileSize = 32;
     

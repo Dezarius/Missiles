@@ -20,13 +20,15 @@ public class Player {
     
     
     Player() {
-        x = Config.windowWidth / 2;
-        y = Config.windowHeight / 2;
+        x = Config.windowWidth / 2 ;
+        y = Config.windowHeight / 2 ;
         angle = 90;
     }
     
     public void draw() {
-        Resources.getImage("airplane").drawCentered(x, y);
+        //Resources.getImage("airplane").setCenterOfRotation(16,16);
+        Resources.getImage("airplane").draw(x - Config.playersize * Config.scale,y - Config.playersize * Config.scale,Config.scale);
+        Resources.getImage("airplane").setCenterOfRotation(16 * Config.scale,16 * Config.scale);
         Resources.getImage("airplane").setRotation(angle);
     }
     
