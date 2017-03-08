@@ -47,6 +47,9 @@ public class Resources {
         images.put("title", loadImage("title.png"));
         images.put("normal", loadImage("missile.png"));
         images.put("speedy", loadImage("speedy.png"));
+        images.put("button_options", loadImage("button_options.png"));
+        images.put("button_story", loadImage("button_story.png"));
+        images.put("button_endless", loadImage("button_endless.png"));
     } catch (SlickException ex) {
       System.out.println("FEHLER beim Laden der Resources. Eine gelöscht?!?");
       Logger.getLogger(Resources.class.getName()).log(Level.SEVERE, null, ex);

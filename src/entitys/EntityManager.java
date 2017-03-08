@@ -98,12 +98,19 @@ public class EntityManager {
 
 
         
-        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10 && GameState.startTime != 0)
-            spawnMissile(MissileEnum.speedy);
+        if(missiles.size() <= (System.currentTimeMillis() - GameState.startTime) / 10000 && GameState.startTime != 0) {
+            double rand = Math.random();
+            if(rand < 0.1) {
+                spawnMissile(MissileEnum.speedy);
+            }
+            else {
+                spawnMissile(MissileEnum.normal);
+            }
+        }
     }
     
     
-    public static void cloads(int delta) {
+    public static void cloads(int delta) { // TODO: Improve Cloud Spawn (diffenrent Window Sizes)gg
         List removeList = new ArrayList();
         for(Object o : clouds) {
             Cloud c = (Cloud) o;

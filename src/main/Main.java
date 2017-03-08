@@ -16,7 +16,7 @@ public class Main{
   
   public static void main(String[] args){
     try{
-        AppGameContainer app = new AppGameContainer(new Engine("Project01"));
+        AppGameContainer app = new AppGameContainer(new Engine("Missiles"));
         
         app.setDisplayMode(Config.windowWidth, Config.windowHeight, false);
         app.start();

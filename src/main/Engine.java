@@ -36,7 +36,7 @@ public class Engine extends StateBasedGame{
     gc.setAlwaysRender(true);
     gc.setVSync(false);
     gc.setShowFPS(true);
-    gc.getGraphics().setAntiAlias(false);
+    gc.getGraphics().setAntiAlias(true);
 
     gc.setFullscreen(false);
 

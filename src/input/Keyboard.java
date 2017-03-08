@@ -21,7 +21,7 @@ public class Keyboard {
     public static void keyInput(GameContainer gc, StateBasedGame s, int delta) throws SlickException {
         changeState(gc, s);
 
-        if(s.getCurrentStateID() == 1) {
+        if(s.getCurrentStateID() == 1 || s.getCurrentStateID() == 0) {
             playerInput(gc, s , delta);
         }
         

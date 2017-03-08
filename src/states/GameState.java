@@ -66,7 +66,7 @@ public class GameState extends BasicGameState {
         
         if(init) {
             Utilities.resetTimer();
-            if(EntityManager.player.getAngle() < 182 && EntityManager.player.getAngle() > 178) {
+            if(EntityManager.player.getAngle() < 185 && EntityManager.player.getAngle() > 175) {
                 EntityManager.player.setAngle(180);
                 init = false;
                 startTime = System.currentTimeMillis();
